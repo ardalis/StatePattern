@@ -5,7 +5,7 @@ namespace Core
 {
     public partial class Policy
     {
-        internal class UnwrittenState : IPolicyStateCommands
+        public class UnwrittenState : IPolicyStateCommands
         {
             private readonly Policy _policy;
 
@@ -17,7 +17,7 @@ namespace Core
 
             public void Close(DateTime closedDate) => throw new InvalidOperationException("Cannot close a policy before it's been Opened.");
 
-            public void Open(DateTime writtenDate)
+            public void Open(DateTime? writtenDate = null)
             {
                 _policy.State = _policy._openState;
                 _policy.DateOpened = writtenDate;

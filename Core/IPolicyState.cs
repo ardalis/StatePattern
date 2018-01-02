@@ -5,7 +5,7 @@ namespace Core
 {
     public interface IPolicyState
     {
-        void Open(DateTime writtenDate);
+        void Open(DateTime? writtenDate = null);
         void Void();
         void Update();
         void Close(DateTime closedDate);

@@ -6,7 +6,7 @@ namespace Core
     public partial class Policy
     {
 
-        internal class OpenState : IPolicyStateCommands
+        public class OpenState : IPolicyStateCommands
         {
             private readonly Policy _policy;
 
@@ -26,7 +26,7 @@ namespace Core
                 _policy.DateClosed = closedDate;
             }
 
-            public void Open(DateTime writtenDate) => throw new InvalidOperationException("Cannot open a policy that is already open.");
+            public void Open(DateTime? writtenDate = null) => throw new InvalidOperationException("Cannot open a policy that is already open.");
 
             public void Update()
             {

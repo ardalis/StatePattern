@@ -18,7 +18,7 @@ namespace Core
 
             public void Close(DateTime closedDate) => throw new InvalidOperationException("Cannot close a policy that has been cancelled.");
 
-            public void Open(DateTime writtenDate) => throw new InvalidOperationException("Cannot open a policy that has been cancelled.");
+            public void Open(DateTime? writtenDate = null) => throw new InvalidOperationException("Cannot open a policy that has been cancelled.");
 
             public void Update() => throw new InvalidOperationException("Cannot update a policy that has been cancelled.");
 
