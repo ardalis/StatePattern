@@ -23,3 +23,7 @@ digraph PolicyState {
 ```
 
 ![image](https://user-images.githubusercontent.com/782127/63168868-55e4be80-c003-11e9-9fc8-3dc6a26d4384.png)
+
+## Notes
+
+The State pattern is described in the Core project and tested in the unit tests. The web project doesn't yet do anything useful. Pull requests welcome to help visualize the pattern.

@@ -1,13 +1,18 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2010
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29111.141
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatePatternDemo", "StatePatternDemo\StatePatternDemo.csproj", "{2DB1FA58-623E-4F2B-9E1E-BBEF6BA79EC3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StatePatternDemo", "StatePatternDemo\StatePatternDemo.csproj", "{2DB1FA58-623E-4F2B-9E1E-BBEF6BA79EC3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{A96F8C64-407F-4AD7-84EF-A13C951DE9F5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", "{A96F8C64-407F-4AD7-84EF-A13C951DE9F5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{C2312343-67F1-46F4-9125-ED7F8898179C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTests", "UnitTests\UnitTests.csproj", "{C2312343-67F1-46F4-9125-ED7F8898179C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{76081CD6-0BEA-47A2-9AFE-6163400B864A}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
