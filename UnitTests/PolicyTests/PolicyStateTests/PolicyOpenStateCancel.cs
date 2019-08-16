@@ -6,7 +6,7 @@ namespace UnitTests.PolicyTests.PolicyStateTests
     public class PolicyOpenStateCancel : BasePolicyTestFixture
     {
         [Fact]
-        public void ThrowsException()
+        public void SetsStateToCancelled()
         {
             _testOpenState.Cancel();
 
