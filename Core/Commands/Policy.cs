@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
 
 namespace Core.Commands;
@@ -34,14 +35,22 @@ public class Policy
 
     public PolicyState State { get; private set; } = PolicyState.Unwritten;
     
-    private static PolicyTransitionTable ValidTransitions = new();
+    private static PolicyTransitionTable _transitionTable = new();
 
     public void UpdateState(PolicyCommand command)
     {
         if (command == null) throw new ArgumentNullException(nameof(command));
 
-        ValidTransitions.ExecuteCommand(command, this);
+        _transitionTable.ExecuteCommand(command, this);
+    }
 
+    // TODO: Is this useful?
+    public List<Type> ListAvailableCommands()
+    {
+        return _transitionTable
+            .Where(kvp => kvp.Key == this.State)
+            .Select(kvp => kvp.Value.CommandType)
+            .ToList();
     }
 
     // TODO: Move to partial class
@@ -50,7 +59,7 @@ public class Policy
         static UnwrittenToOpenTransition()
         {
             // register as a valid operation
-            ValidTransitions.Add(PolicyState.Unwritten, new UnwrittenToOpenTransition());
+            _transitionTable.Add(PolicyState.Unwritten, new UnwrittenToOpenTransition());
         }
 
         public UnwrittenToOpenTransition() : base(PolicyState.Unwritten, PolicyCommand.OpenCommand)
@@ -75,7 +84,7 @@ public class Policy
         static UnwrittenToVoidTransition()
         {
             // register as a valid operation
-            ValidTransitions.Add(PolicyState.Unwritten, new UnwrittenToVoidTransition());
+            _transitionTable.Add(PolicyState.Unwritten, new UnwrittenToVoidTransition());
         }
 
         public UnwrittenToVoidTransition() : base(PolicyState.Unwritten, PolicyCommand.VoidCommand)
