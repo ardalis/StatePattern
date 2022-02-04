@@ -11,6 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTests", "UnitTests\Unit
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{76081CD6-0BEA-47A2-9AFE-6163400B864A}"
 	ProjectSection(SolutionItems) = preProject
+		.github\workflows\blank.yml = .github\workflows\blank.yml
 		README.md = README.md
 	EndProjectSection
 EndProject
