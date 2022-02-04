@@ -2,6 +2,7 @@
 
 namespace Core.ClassicPattern;
 
+// NOTE: Policy is a partial class - see all the other files for more behavior
 public partial class Policy : IPolicyState
 {
     private Policy()
