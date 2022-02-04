@@ -1,4 +1,5 @@
 ﻿using Core;
+using Core.ClassicPattern;
 using System;
 
 namespace UnitTests.Builders

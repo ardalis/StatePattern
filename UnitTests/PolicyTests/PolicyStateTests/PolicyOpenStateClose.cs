@@ -1,24 +1,23 @@
-﻿using Core;
+﻿using Core.ClassicPattern;
 using Xunit;
 
-namespace UnitTests.PolicyTests.PolicyStateTests
+namespace UnitTests.PolicyTests.PolicyStateTests;
+
+public class PolicyOpenStateClose : BasePolicyTestFixture
 {
-    public class PolicyOpenStateClose : BasePolicyTestFixture
+    [Fact]
+    public void SetsStateToClosed()
     {
-        [Fact]
-        public void SetsStateToClosed()
-        {
-            _testOpenState.Close(_policyBuilder.TEST_CLOSED_DATE);
+        _testOpenState.Close(_policyBuilder.TEST_CLOSED_DATE);
 
-            Assert.IsType<Policy.ClosedState>(_testPolicy.State);
-        }
+        Assert.IsType<Policy.ClosedState>(_testPolicy.State);
+    }
 
-        [Fact]
-        public void SetsDateClosed()
-        {
-            _testOpenState.Close(_policyBuilder.TEST_CLOSED_DATE);
+    [Fact]
+    public void SetsDateClosed()
+    {
+        _testOpenState.Close(_policyBuilder.TEST_CLOSED_DATE);
 
-            Assert.Equal(_policyBuilder.TEST_CLOSED_DATE, _testPolicy.DateClosed);
-        }
+        Assert.Equal(_policyBuilder.TEST_CLOSED_DATE, _testPolicy.DateClosed);
     }
 }

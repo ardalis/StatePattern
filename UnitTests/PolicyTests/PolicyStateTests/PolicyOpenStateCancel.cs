@@ -1,16 +1,15 @@
-﻿using Core;
+﻿using Core.ClassicPattern;
 using Xunit;
 
-namespace UnitTests.PolicyTests.PolicyStateTests
-{
-    public class PolicyOpenStateCancel : BasePolicyTestFixture
-    {
-        [Fact]
-        public void SetsStateToCancelled()
-        {
-            _testOpenState.Cancel();
+namespace UnitTests.PolicyTests.PolicyStateTests;
 
-            Assert.IsType<Policy.CancelledState>(_testPolicy.State);
-        }
+public class PolicyOpenStateCancel : BasePolicyTestFixture
+{
+    [Fact]
+    public void SetsStateToCancelled()
+    {
+        _testOpenState.Cancel();
+
+        Assert.IsType<Policy.CancelledState>(_testPolicy.State);
     }
 }

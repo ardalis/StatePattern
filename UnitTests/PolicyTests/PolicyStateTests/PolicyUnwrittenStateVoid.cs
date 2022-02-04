@@ -1,16 +1,15 @@
-﻿using Core;
+﻿using Core.ClassicPattern;
 using Xunit;
 
-namespace UnitTests.PolicyTests.PolicyStateTests
-{
-    public class PolicyUnwrittenStateVoid : BasePolicyTestFixture
-    {
-        [Fact]
-        public void SetsStateToVoid()
-        {
-            _testUnwrittenState.Void();
+namespace UnitTests.PolicyTests.PolicyStateTests;
 
-            Assert.IsType<Policy.VoidState>(_testPolicy.State);
-        }
+public class PolicyUnwrittenStateVoid : BasePolicyTestFixture
+{
+    [Fact]
+    public void SetsStateToVoid()
+    {
+        _testUnwrittenState.Void();
+
+        Assert.IsType<Policy.VoidState>(_testPolicy.State);
     }
 }

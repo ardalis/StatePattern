@@ -1,4 +1,4 @@
-using Core;
+using Core.ClassicPattern;
 using Xunit;
 
 namespace UnitTests.PolicyTests.PolicyStateTests
