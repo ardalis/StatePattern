@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 
 namespace Core.Commands;
 
 /// <summary>
-/// Classic State pattern requires unique methods totaly Nodes * PossibleCommands
+/// Classic State pattern requires unique methods totalling Nodes * PossibleCommands
 /// For this Policy there are 5 nodes, 5 possible commands, for 25 methods
 /// Using commands we will write more classes, but fewer overall methods
 /// </summary>
@@ -12,8 +13,10 @@ public class Policy
 {
     static Policy()
     {
-        Type type = typeof(UnwrittenToOpenTransition);
-        System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(type.TypeHandle);
+        // static registration with PolicyTransitionTable wasn't happening without this
+        // TODO: Move to separate partial class
+        RuntimeHelpers.RunClassConstructor(typeof(UnwrittenToOpenTransition).TypeHandle);
+        RuntimeHelpers.RunClassConstructor(typeof(UnwrittenToVoidTransition).TypeHandle);
     }
     private Policy()
     {
@@ -66,6 +69,29 @@ public class Policy
         }
     }
 
+    // TODO: Move to partial class
+    private class UnwrittenToVoidTransition : PolicyTransition
+    {
+        static UnwrittenToVoidTransition()
+        {
+            // register as a valid operation
+            ValidTransitions.Add(PolicyState.Unwritten, new UnwrittenToVoidTransition());
+        }
+
+        public UnwrittenToVoidTransition() : base(PolicyState.Unwritten, PolicyCommand.VoidCommand)
+        {
+        }
+
+        public override void Execute(Policy policy, PolicyCommand command)
+        {
+            base.Execute(policy, command);
+
+            if (command is PolicyCommand.PolicyOpenCommand actualCommand)
+            {
+                policy.State = PolicyState.Void;
+            }
+        }
+    }
 }
 
 public class PolicyTransitionTable : Dictionary<PolicyState, PolicyTransition>
@@ -120,11 +146,13 @@ public class PolicyCommand
     // TODO: How to have a list of command but also have specific instance of commands with specific properties like Dates
     //public static readonly PolicyCommand Open = new PolicyCommand(nameof(Open));
     public static readonly PolicyCommand Update = new PolicyCommand(nameof(Update));
-    public static readonly PolicyCommand Void = new PolicyCommand(nameof(Void));
+    //public static readonly PolicyCommand Void = new PolicyCommand(nameof(Void));
     public static readonly PolicyCommand Cancel = new PolicyCommand(nameof(Cancel));
     public static readonly PolicyCommand Close = new PolicyCommand(nameof(Close));
 
+    // TODO: Finish migrating from command instances to command types
     public static readonly Type OpenCommand = typeof(PolicyOpenCommand);
+    public static readonly Type VoidCommand = typeof(PolicyVoidCommand);
 
     public string Name { get; private set; }
     private PolicyCommand(string name)
@@ -132,11 +160,15 @@ public class PolicyCommand
         Name = name;
     }
 
-    public static PolicyCommand Open(DateTime dateOpened)
+    public static PolicyCommand Void() => new PolicyVoidCommand();
+    public class PolicyVoidCommand : PolicyCommand
     {
-        return new PolicyOpenCommand(dateOpened);
+        public PolicyVoidCommand() : base(nameof(Void))
+        {
+        }
     }
 
+    public static PolicyCommand Open(DateTime dateOpened) => new PolicyOpenCommand(dateOpened);
     public class PolicyOpenCommand : PolicyCommand
     {
         public PolicyOpenCommand(DateTime dateOpened) : base(nameof(Open))
@@ -159,6 +191,8 @@ public class PolicyTransition
         CommandType = commandType;
     }
 
+    // TODO: Rename to Handle?
+    // Transitions are basically command handlers that operate on a policy instance
     public virtual void Execute(Policy policy, PolicyCommand command)
     {
     }
