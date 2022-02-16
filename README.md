@@ -1,6 +1,23 @@
-# StatePattern
+# State Design Pattern
 
-An example of the State design pattern in C#
+An example of the State design pattern in C#.
+
+New Mermaid syntax:
+
+```mermaid
+stateDiagram-v2
+  [*] --> Unwritten
+  
+  Unwritten --> Open: Open
+  Unwritten --> Void: Void
+  
+  Open --> Void: Void
+  Open --> Cancelled: Cancel
+  Open --> Closed: Close
+  Open --> Open: Update
+  
+  Closed --> Open: Open
+```
 
 State Transition Diagram ([copy here](http://www.webgraphviz.com/)):
 
